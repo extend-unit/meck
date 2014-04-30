@@ -56,11 +56,7 @@ add_exports(Exports, AbsCode) ->
 
 -spec beam_file(module()) -> binary().
 beam_file(Module) ->
-    % code:which/1 cannot be used for cover_compiled modules
-    case code:get_object_code(Module) of
-        {_, Binary, _Filename} -> Binary;
-        error                  -> throw({object_code_not_found, Module})
-    end.
+    'Elixir.ExtendUnit':get_object_code(Module).
 
 -spec compile_and_load_forms(erlang_form()) -> binary().
 compile_and_load_forms(AbsCode) -> compile_and_load_forms(AbsCode, []).
